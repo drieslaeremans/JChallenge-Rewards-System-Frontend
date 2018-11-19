@@ -10,3 +10,27 @@ $theme-colors: (
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 // Eigen code/partials
+body {
+  background-color: #f4f4f4;
+}
+
+.container {
+  background-color: #ffffff;
+  max-width: 1300px;
+}
+
+.navbar-brand img {
+  max-width: 150px;
+}
+
+.icon-bar {
+  width: 22px;
+  height: 2px;
+  margin: 3px 0 2px;
+  display: block;
+  background: #000;
+}
+
+.active {
+  border-bottom: 2px solid #F49900;
+}
