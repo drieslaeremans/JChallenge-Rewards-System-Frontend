@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  readonly URL = '';
+  readonly USER_URL = '';
   constructor() { }
 
   ngOnInit() {
