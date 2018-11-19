@@ -4,12 +4,14 @@ import { User } from '../interfaces/user';
 import {HttpClient, HttpParams } from '@angular/common/http';
 import { EMPTY, Observable} from 'rxjs';
 import { catchError, share, tap } from 'rxjs/operators';
+import {AlertBox} from '../interfaces/alert-box';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  alertBox$: BehaviorSubject<AlertBox> = new BehaviorSubject(null);
   userData$: BehaviorSubject<User> = new BehaviorSubject(null);
   readonly LOGIN_API_URL = 'https://fast-temple-89292.herokuapp.com/user/login';
 
@@ -50,4 +52,17 @@ export class AuthService {
       this.userData$.next(null);
     }
   }
+
+  // Message BS4 alert-box
+  setMessage(msg: string, color: string) {
+    this.alertBox$.next({
+      message: msg,
+      color: color
+    });
+  }
+
+  clearMessage() {
+    this.alertBox$.next(null);
+  }
+
 }
