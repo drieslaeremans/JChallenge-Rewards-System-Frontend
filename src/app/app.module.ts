@@ -12,6 +12,8 @@ import { LoginModule } from './login/login.module';
 import { OpdrachtenModule } from './opdrachten/opdrachten.module';
 import { WinkelModule } from './winkel/winkel.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { WinkelModule } from './winkel/winkel.module';
     PageNotFoundModule,
     LoginModule,
     OpdrachtenModule,
-    WinkelModule
+    WinkelModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
