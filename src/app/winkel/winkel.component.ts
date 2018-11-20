@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {RewardsService} from '../services/rewards.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-winkel',
@@ -6,14 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class WinkelComponent implements OnInit {
-
-  constructor() { }
+  rewards$: Observable<any>;
+  constructor(public rewardsService: RewardsService) {
+  }
 
   ngOnInit() {
   }
 
   koop() {
-    console.log("Your purchase has been registered");
+    console.log(this.rewardsService.getRewardTemplates());
   }
 
 }

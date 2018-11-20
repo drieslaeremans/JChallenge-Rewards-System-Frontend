@@ -9,13 +9,12 @@ import {TaskTemplate} from '../interfaces/task-template';
   styles: []
 })
 export class HomeComponent implements OnInit {
-  taken$;
+  takenfeed$;
 
   constructor(public rewardsService: RewardsService, public tasksService: TasksService) { }
 
   ngOnInit() {
-    this.taken$ = this.tasksService.getTaskTemplates();
-    console.log(this.taken$);
+    this.takenfeed$ = this.tasksService.getTaskFeed();
   }
 
 }

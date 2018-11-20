@@ -24,7 +24,8 @@ export class TasksService {
   readonly ADD_TASKS_API = 'https://fast-temple-89292.herokuapp.com/v1/task/template/add';
   readonly ADD_TASKS_API_LOCAL = 'http://localhost:3000/v1/task/template/add';
 
-  readonly GET_TASKS_FEED = 'https://fast-temple-89292.herokuapp.com/v1/tasks/feed'
+  readonly GET_TASKS_FEED = 'https://fast-temple-89292.herokuapp.com/v1/tasks/feed';
+  readonly GET_TASKS_FEED_LOCAL = 'http://localhost:3000/v1/tasks/feed';
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +38,7 @@ export class TasksService {
   }
 
   getTaskFeed(limit = 3): Observable<any[]> {
-    return this.http.get<any[]>(this.GET_TASKS_FEED + '/' + limit);
+    return this.http.get<any[]>(this.GET_TASKS_FEED_LOCAL + '/' + limit);
   }
 
   addTaskTemplate(title: string, points: number, description: string) {
