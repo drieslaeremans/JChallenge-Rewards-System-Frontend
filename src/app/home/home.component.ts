@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TasksService} from '../services/tasks.service';
+import {RewardsService} from '../services/rewards.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import {TasksService} from '../services/tasks.service';
 export class HomeComponent implements OnInit {
 
   readonly USER_URL = '';
-  constructor(public tasksService: TasksService) { }
+  constructor(public rewardsService: RewardsService) { }
 
   ngOnInit() {
   }

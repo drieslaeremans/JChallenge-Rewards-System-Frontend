@@ -11,8 +11,10 @@
         <h3>Een bak bier:</h3>
       </div>
       <div class="col-12">
-        <button (click)="tasksService.getTaskTemplates()">GetTT</button>
-        <!--{{tasksService.getTaskTemplates$() | async | json }}-->
+        <button (click)="rewardsService.getRewardTemplates()">Get RT</button>
+        <button (click)="rewardsService.getRewardTemplate('5bf3fd829073da25206a12b4')">Get 1 Reward</button>
+        <button (click)="rewardsService.addRewardTemplate('Nacht met Stef', 69, '')">Add Reward</button>
+
       </div>
     </div>
 
