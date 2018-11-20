@@ -24,25 +24,28 @@ export class TasksService {
   readonly ADD_TASKS_API = 'https://fast-temple-89292.herokuapp.com/v1/task/template/add';
   readonly ADD_TASKS_API_LOCAL = 'http://localhost:3000/v1/task/template/add';
 
+  readonly GET_TASKS_FEED = 'https://fast-temple-89292.herokuapp.com/v1/tasks/feed'
+
   constructor(private http: HttpClient) { }
 
   getTaskTemplates(): Observable<any[]> {
     return this.http.get<any[]>(this.GET_TASKS_TEMPLATES_LOCAL);
   }
 
-  // Geeft 1 task die uitgevoerd kan worden aan de hand van een meegegeven ID
   getTaskTemplateById(templateId): Observable<any> {
     return this.http.get<any>(this.GET_TASKS_TEMPLATE + '/' + templateId);
   }
 
-  // Voegt een task toe aan de database aan de hand van een title, points en description
+  getTaskFeed(limit = 3): Observable<any[]> {
+    return this.http.get<any[]>(this.GET_TASKS_FEED + '/' + limit);
+  }
+
   addTaskTemplate(title: string, points: number, description: string) {
     this.http.post(this.ADD_TASKS_API_LOCAL,
       {title, points, description, token: localStorage.getItem('userToken')}).toPromise()
       .then( (message) => console.log(message['message']));
   }
 
-  // Verwijderd een task uit de database aan de hand van de meegegeven ID
   deleteTaskTemplate(templateId: string) {
     this.http.delete(this.DELETE_TASK_TEMPLATE_LOCAL + '/' + templateId);
   }
