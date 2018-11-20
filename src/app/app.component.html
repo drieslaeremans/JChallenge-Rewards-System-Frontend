@@ -1,6 +1,7 @@
 <div class="container">
   <app-navbar></app-navbar>
   <router-outlet></router-outlet>
+  <!--<app-footer></app-footer>-->
 </div>
 <footer class="alert alert-primary fixed-bottom d-flex justify-content-between" *ngIf="showBanner">
   <button class="btn btn-sm btn-outline-primary mr-2" type="button" (click)="addToHomescreen()">
@@ -10,3 +11,4 @@
     <span (click)="showBanner = !showBanner">&times;</span>
   </button>
 </footer>
+

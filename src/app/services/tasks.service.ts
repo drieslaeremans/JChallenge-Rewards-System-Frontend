@@ -26,7 +26,7 @@ export class TasksService {
   constructor(private http: HttpClient) { }
 
   getTaskTemplates() {
-    return this.http.get(this.GET_TASKS_TEMPLATES)
+    return this.http.get(this.GET_TASKS_TEMPLATES_LOCAL)
       .toPromise().then((task) => console.log(task));
   }
 
