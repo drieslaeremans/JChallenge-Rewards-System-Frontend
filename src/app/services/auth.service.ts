@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/user';
-import {HttpClient, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { EMPTY, Observable} from 'rxjs';
 import { catchError, share, tap } from 'rxjs/operators';
 import {AlertBox} from '../interfaces/alert-box';
@@ -14,29 +14,33 @@ export class AuthService {
   alertBox$: BehaviorSubject<AlertBox> = new BehaviorSubject(null);
   userData$: BehaviorSubject<User> = new BehaviorSubject(null);
   readonly LOGIN_API_URL = 'https://fast-temple-89292.herokuapp.com/user/login';
+  readonly LOGIN_API_URL_LOCAL = 'http://localhost:3000/user/login';
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
-    const user = this.getUser(email, password);
-    console.log(user);
+    this.logout();
+    this.meldAan(email, password);
   }
 
-  getUser(email: string, password: string) {
-    const params = new HttpParams()
-      .set('email', email)
-      .set('password', password);
-
-    return this.http.get(this.LOGIN_API_URL, {params})
-      .pipe(
-        tap(req => console.log('get-request', req)),
-        catchError((error) => {
-          console.warn(error);
-          alert(error.message);
-          return EMPTY;
-        }),
-        share()
+  meldAan(email: string, password: string) {
+    return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
+      .subscribe(
+        (res) => {
+          if (res !== 'Foute login') {
+            this.setUserData(res);
+          } else {
+            console.log('it works');
+          }
+        },
+        err => console.log(err)
       );
+  }
+
+  logout() {
+    this.clearMessage();
+    localStorage.removeItem('user');
+    this.userData$.next(null);
   }
 
   setUserData(user) {
@@ -51,6 +55,8 @@ export class AuthService {
     } else {
       this.userData$.next(null);
     }
+
+    console.log('userdata', this.userData$);
   }
 
   // Message BS4 alert-box

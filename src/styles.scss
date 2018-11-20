@@ -34,3 +34,14 @@ body {
 .active {
   border-bottom: 2px solid #F49900;
 }
+
+.btn-login {
+  border: none;
+  color: #F49900;
+}
+
+.btn-login:hover {
+  border: none;
+  background-color: #F49900;
+  color: #FFF;
+}
