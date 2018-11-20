@@ -12,4 +12,8 @@ export class WinkelComponent implements OnInit {
   ngOnInit() {
   }
 
+  koop() {
+    console.log("Your purchase has been registered");
+  }
+
 }
