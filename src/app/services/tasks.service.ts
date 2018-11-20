@@ -41,7 +41,7 @@ export class TasksService {
     console.log('Voor statement');
     this.http.post(this.ADD_TASKS_API_LOCAL,
       {title, points, description, token: localStorage.getItem('userToken')}).toPromise()
-      .then( (message) => console.log(message.message));
+      .then( (message) => console.log(message['message']));
     console.log('Na statement');
 
   }
