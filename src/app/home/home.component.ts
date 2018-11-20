@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TasksService} from '../services/tasks.service';
 import {RewardsService} from '../services/rewards.service';
+import {TaskTemplate} from '../interfaces/task-template';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,13 @@ import {RewardsService} from '../services/rewards.service';
   styles: []
 })
 export class HomeComponent implements OnInit {
+  taken$;
 
-  readonly USER_URL = '';
-  constructor(public rewardsService: RewardsService) { }
+  constructor(public rewardsService: RewardsService, public tasksService: TasksService) { }
 
   ngOnInit() {
+    this.taken$ = this.tasksService.getTaskTemplates();
+    console.log(this.taken$);
   }
 
 }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TaskTemplate} from '../interfaces/task-template';
 import { environment } from '../../environments/environment';
+import {Observable} from 'rxjs';
+import {appendNgContent} from '@angular/core/src/view/ng_content';
 
 @Injectable({
   providedIn: 'root'
@@ -24,26 +26,20 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
-  // Geeft alle opdrachten (tasks) die kunnen uitgevoerd worden voor punten
-  getTaskTemplates() {
-    return this.http.get(this.GET_TASKS_TEMPLATES_LOCAL)
-      .toPromise().then((tasks) => console.log(tasks));
+  getTaskTemplates(): Observable<any[]> {
+    return this.http.get<any[]>(this.GET_TASKS_TEMPLATES_LOCAL);
   }
 
   // Geeft 1 task die uitgevoerd kan worden aan de hand van een meegegeven ID
-  getTaskTemplate(templateId) {
-    return this.http.get(this.GET_TASKS_TEMPLATE_LOCAL + '/' + templateId)
-      .toPromise().then((task) => console.log(task));
+  getTaskTemplateById(templateId): Observable<any> {
+    return this.http.get<any>(this.GET_TASKS_TEMPLATE + '/' + templateId);
   }
 
   // Voegt een task toe aan de database aan de hand van een title, points en description
   addTaskTemplate(title: string, points: number, description: string) {
-    console.log('Voor statement');
     this.http.post(this.ADD_TASKS_API_LOCAL,
       {title, points, description, token: localStorage.getItem('userToken')}).toPromise()
       .then( (message) => console.log(message['message']));
-    console.log('Na statement');
-
   }
 
   // Verwijderd een task uit de database aan de hand van de meegegeven ID
