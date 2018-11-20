@@ -51,6 +51,7 @@ export class AuthService {
         name: user.name,
         password: '',
         type: user.type,
+        punten: user.punten || 150
       });
       localStorage.setItem('userToken', user.token);
       this.router.navigate(['/home']);

@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'opdrachten', component: OpdrachtenComponent, canActivate: [WorkerGuard]},
   {path: 'winkel', component: WinkelComponent, canActivate: [WorkerGuard]},
   {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

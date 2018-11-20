@@ -18,8 +18,8 @@
       </li>
     </ul>
     <ul class="navbar-nav">
-      <span class="navbar-text d-dm-block d-sm-none" *ngIf="user">
-        {{ user.name }}
+      <span class="navbar-text d-sm-none d-md-block" *ngIf="user">
+        {{ user.name }} ({{user.punten}} ptn.)
       </span>
       <li class="nav-item" *ngIf="!user">
         <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>

@@ -13,6 +13,8 @@ import { OpdrachtenModule } from './opdrachten/opdrachten.module';
 import { WinkelModule } from './winkel/winkel.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginModule,
     OpdrachtenModule,
     WinkelModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
