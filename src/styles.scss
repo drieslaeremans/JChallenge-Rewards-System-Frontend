@@ -35,13 +35,29 @@ body {
   border-bottom: 2px solid #F49900;
 }
 
-.btn-login {
+.btn-orange {
   border: none;
   color: #F49900;
 }
 
-.btn-login:hover {
+.btn-orange:hover {
   border: none;
   background-color: #F49900;
   color: #FFF;
+}
+
+.badge {
+  background-color: #F49900;
+}
+
+.navbar-text {
+  font-size: 70%;
+  color: white !important;
+}
+
+.avatar {
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
