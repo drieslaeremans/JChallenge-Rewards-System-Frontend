@@ -8,11 +8,17 @@ import {TasksService} from '../services/tasks.service';
 })
 export class OpdrachtenComponent implements OnInit {
 
-
+  tasks$;
+  selectedTask$;
 
   constructor(public tasksService: TasksService) { }
 
   ngOnInit() {
+    this.tasks$ = this.tasksService.getTaskTemplates();
+  }
+
+  changeTask(task) {
+    this.selectedTask$ = task;
   }
 
 }

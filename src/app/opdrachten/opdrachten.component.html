@@ -3,25 +3,17 @@
     <h4>Overzicht van alle opdrachten</h4>
   </div>
   <br/>
-  <ul>
-    <li *ngFor="let task of tasksService.getTaskTemplates()">{{task._id}}</li>
-  </ul>
-
-  <!--<div class="col-md-4 list-group" *ngFor="let task of (tasksService.getTaskTemplates())">-->
-    <!--<a href="" class="list-group-item list-group-item-action">-->
-      <!--{{ task.title }}-->
-      <!--<span class="badge badge-pill float-right">{{ task.points }}</span>-->
-    <!--</a>-->
-  <!--</div>-->
+  <div class="col-md-4 list-group">
+    <div *ngFor="let task of (tasks$ | async)">
+      <a (click) = changeTask(task) class="list-group-item list-group-item-action">
+        {{ task.title }}
+        <span class="badge badge-pill float-right">{{ task.points }}</span>
+      </a>
+    </div>
+  </div>
   <div class="col-md-8">
     <br/>
-    <form>
-      <div class="form-group">
-        <label for="omschrijving">Beschrijf wat je gedaan hebt</label>
-        <textarea class="form-control" id="omschrijving" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-outline-secondary btn-orange col-12">Verzenden</button>
-    </form>
+    <app-details [taak]="selectedTask$"></app-details>
   </div>
 </div>
 

@@ -1,0 +1,12 @@
+<div *ngIf="taak">
+  <h4>{{ taak.title }}</h4>
+  <h6 class="card-subtitle mb-2 text-muted">{{ taak.points }} punten te verdienen</h6>
+  <form>
+    <div class="form-group">
+      <label for="description">Beschrijf wat je gedaan hebt</label>
+      <textarea class="form-control" id="description" rows="3" #description="ngModel" [(ngModel)]="taak.description"></textarea>
+    </div>
+    <button type="submit" (click)="taakToevoegen()" class="btn btn-outline-secondary btn-orange col-12">Verzenden</button>
+  </form>
+</div>
+
