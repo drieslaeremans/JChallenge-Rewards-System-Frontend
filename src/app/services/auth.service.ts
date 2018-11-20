@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { EMPTY, Observable} from 'rxjs';
 import { catchError, share, tap } from 'rxjs/operators';
 import {AlertBox} from '../interfaces/alert-box';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +14,24 @@ export class AuthService {
 
   alertBox$: BehaviorSubject<AlertBox> = new BehaviorSubject(null);
   userData$: BehaviorSubject<User> = new BehaviorSubject(null);
-  readonly LOGIN_API_URL = 'https://fast-temple-89292.herokuapp.com/user/login';
-  readonly LOGIN_API_URL_LOCAL = 'http://localhost:3000/user/login';
+  readonly LOGIN_API_URL = 'https://fast-temple-89292.herokuapp.com/v1/user/login';
+  readonly LOGIN_API_URL_LOCAL = 'http://localhost:3000/v1/user/login';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string) {
+    console.log('in login');
     this.logout();
     this.meldAan(email, password);
   }
 
   meldAan(email: string, password: string) {
+    console.log('in meldAan');
     return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
       .subscribe(
         (res) => {
-          if (res !== 'Foute login') {
-            this.setUserData(res);
-          } else {
-            console.log('it works');
-          }
+          this.setUserData(res);
+          console.log(res);
         },
         err => console.log(err)
       );
@@ -52,6 +52,8 @@ export class AuthService {
         password: '',
         type: user.type,
       });
+      localStorage.setItem('userToken', user.token);
+      this.router.navigate(['/home']);
     } else {
       this.userData$.next(null);
     }
