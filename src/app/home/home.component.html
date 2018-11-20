@@ -12,7 +12,9 @@
       </div>
       <div class="col-12">
         <button (click)="tasksService.getTaskTemplates()">GetTT</button>
-        <!--{{tasksService.getTaskTemplates$() | async | json }}-->
+        <button (click)="tasksService.getTaskTemplate('5bf3fce2e3f70200162ad243')">Get 1</button>
+        <button (click)="tasksService.addTaskTemplate('DDDDD', 5000, 'Doe iets')">Add</button>
+
       </div>
     </div>
 
