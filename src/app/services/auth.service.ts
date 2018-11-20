@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/user';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { EMPTY, Observable} from 'rxjs';
-import { catchError, share, tap } from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 import {AlertBox} from '../interfaces/alert-box';
 import {Router} from '@angular/router';
 
@@ -27,11 +25,16 @@ export class AuthService {
 
   meldAan(email: string, password: string) {
     console.log('in meldAan');
-    return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
+    return this.http.post(this.LOGIN_API_URL, {email, password})
       .subscribe(
         (res) => {
-          this.setUserData(res);
-          console.log(res);
+          if (res === 'Foute login') {
+            this.clearMessage();
+            this.setMessage('Foutieve login', 'alert-danger');
+          } else {
+            this.setUserData(res);
+            console.log(res);
+          }
         },
         err => console.log(err)
       );

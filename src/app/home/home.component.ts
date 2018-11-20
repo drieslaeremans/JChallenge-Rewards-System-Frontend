@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TasksService} from '../services/tasks.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   readonly USER_URL = '';
-  constructor() { }
+  constructor(public tasksService: TasksService) { }
 
   ngOnInit() {
   }
