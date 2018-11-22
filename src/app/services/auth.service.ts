@@ -67,7 +67,6 @@ export class AuthService {
 
   // Message BS4 alert-box
   setMessage(msg: string, color: string) {
-    console.log('Set', this.alertBox$);
     this.alertBox$.next({
       message: msg,
       color: color
@@ -76,7 +75,6 @@ export class AuthService {
 
   clearMessage() {
     this.alertBox$.next(null);
-    console.log('Clear', this.alertBox$);
   }
 
 }

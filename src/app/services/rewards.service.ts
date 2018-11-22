@@ -41,8 +41,8 @@ export class RewardsService {
   addRewardTemplate(title: string, points: number, description: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Authorization': localStorage.getItem('userToken'),
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQWRtaW4iLCJpYXQiOjE1NDI4ODA3ODQsImlzcyI6InRlYW0xMSJ9.S7D36j82q9dgosWoW0zNn5NiALmVZjvYiQCBaWxvBEE'
+      'Authorization': localStorage.getItem('userToken'),
+      // 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQWRtaW4iLCJpYXQiOjE1NDI4ODA3ODQsImlzcyI6InRlYW0xMSJ9.S7D36j82q9dgosWoW0zNn5NiALmVZjvYiQCBaWxvBEE'
     });
 
     this.http.post(this.ADD_REWARDS_API_LOCAL,
