@@ -25,7 +25,7 @@ export class AuthService {
 
   meldAan(email: string, password: string) {
     console.log('in meldAan');
-    return this.http.post(this.LOGIN_API_URL, {email, password})
+    return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
       .subscribe(
         (res) => {
           if (res === 'Foute login') {
@@ -67,6 +67,7 @@ export class AuthService {
 
   // Message BS4 alert-box
   setMessage(msg: string, color: string) {
+    console.log('Set', this.alertBox$);
     this.alertBox$.next({
       message: msg,
       color: color
@@ -75,6 +76,7 @@ export class AuthService {
 
   clearMessage() {
     this.alertBox$.next(null);
+    console.log('Clear', this.alertBox$);
   }
 
 }
