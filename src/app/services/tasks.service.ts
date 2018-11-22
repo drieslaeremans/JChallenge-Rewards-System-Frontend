@@ -27,7 +27,7 @@ export class TasksService {
   readonly GET_TASKS_FEED = 'https://fast-temple-89292.herokuapp.com/v1/tasks/feed';
   readonly GET_TASKS_FEED_LOCAL = 'http://localhost:3000/v1/tasks/feed';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }Ma
 
   getTaskTemplates(): Observable<any[]> {
     return this.http.get<any[]>(this.GET_TASKS_TEMPLATES_LOCAL);

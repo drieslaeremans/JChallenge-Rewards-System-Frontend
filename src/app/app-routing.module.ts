@@ -6,13 +6,19 @@ import {OpdrachtenComponent} from './opdrachten/opdrachten.component';
 import {WinkelComponent} from './winkel/winkel.component';
 import {LoginComponent} from './login/login.component';
 import {WorkerGuard} from './guards/worker.guard';
+import {UserGuard} from './guards/user.guard';
+import {AdminRewardsComponent} from './admin-rewards/admin-rewards.component';
+import {AdminGuard} from './guards/admin.guard';
+import {AdminTasksComponent} from './admin-tasks/admin-tasks.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent },
+  {path: 'home', component: HomeComponent, canActivate: [UserGuard] },
   {path: 'opdrachten', component: OpdrachtenComponent, canActivate: [WorkerGuard]},
   {path: 'winkel', component: WinkelComponent, canActivate: [WorkerGuard]},
   {path: 'login', component: LoginComponent},
-  {path: '', component: HomeComponent},
+  {path: 'rewardsettings', component: AdminRewardsComponent, canActivate: [AdminGuard]},
+  {path: 'tasksettings', component: AdminTasksComponent, canActivate: [AdminGuard]},
+  {path: '', component: HomeComponent, canActivate: [UserGuard]},
   {path: '**', component: PageNotFoundComponent}
 ];
 

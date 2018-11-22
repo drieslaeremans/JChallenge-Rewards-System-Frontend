@@ -10,7 +10,7 @@
 
 <div class="row">
   <div class="col-md-3"></div>
-  <div class="col-md-6 col-sm-12">
+  <div class="col-md-6 col-sm-12" *ngIf="!loading">
     <h4>Login</h4>
     <form #f="ngForm">
       <div class="form-group">
@@ -48,6 +48,9 @@
         Login
       </button>
     </form>
+  </div>
+  <div class="col-md-6 d-flex justify-content-center" *ngIf="loading">
+    <div class="loader"></div>
   </div>
   <div class="col-md-3"></div>
 </div>

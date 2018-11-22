@@ -9,6 +9,8 @@ import {AuthService} from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  loading;
+
   loginData = {
     email: '',
     password: ''
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
+    this.loading = false;
     if (localStorage.getItem('loginData')) {
       this.loginData = JSON.parse(localStorage.getItem('loginData'));
     }
@@ -33,6 +36,7 @@ export class LoginComponent implements OnInit {
   emailLogin(data: any, isValid: string) {
     this.authService.clearMessage();
     if (isValid) {
+      this.loading = true;
       this.authService.login(data.email, data.password);
       localStorage.setItem('loginData', JSON.stringify(data));
     } else {

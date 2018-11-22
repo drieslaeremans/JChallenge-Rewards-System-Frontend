@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './footer/footer.component';
+import { AdminTasksModule } from './admin-tasks/admin-tasks.module';
+import { AdminRewardsModule } from './admin-rewards/admin-rewards.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { FooterComponent } from './footer/footer.component';
     OpdrachtenModule,
     WinkelModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AdminTasksModule,
+    AdminRewardsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

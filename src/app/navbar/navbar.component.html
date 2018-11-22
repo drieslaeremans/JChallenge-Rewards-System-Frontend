@@ -11,10 +11,16 @@
         <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/opdrachten" routerLinkActive="active">Opdrachten</a>
+        <a class="nav-link" routerLink="/opdrachten" routerLinkActive="active" *ngIf='user && user.type=="worker"'>Opdrachten</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/winkel" routerLinkActive="active">Winkel</a>
+        <a class="nav-link" routerLink="/winkel" routerLinkActive="active" *ngIf='user && user.type=="worker"'>Winkel</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/tasksettings" routerLinkActive="active" *ngIf='user && user.type=="admin"'>Opdrachten beheren</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/rewardsettings" routerLinkActive="active" *ngIf='user && user.type=="admin"'>Winkel beheren</a>
       </li>
     </ul>
     <ul class="navbar-nav">
