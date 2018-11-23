@@ -28,15 +28,14 @@ export class AuthService {
     return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
       .subscribe(
         (res) => {
-          if (res === 'Foute login') {
-            this.clearMessage();
-            this.setMessage('Foutieve login', 'alert-danger');
-          } else {
-            this.setUserData(res);
-            console.log(res);
-          }
+          this.setMessage('Aanmelden gelukt. Even geduld', 'alert-success');
+          this.setUserData(res);
+          console.log(res);
         },
-        err => console.log(err)
+        (error) => {
+          this.setMessage('Foutieve login', 'alert-danger');
+          console.log('Foutieve login');
+        }
       );
   }
 

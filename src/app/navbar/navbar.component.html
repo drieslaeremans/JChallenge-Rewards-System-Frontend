@@ -26,7 +26,7 @@
     <ul class="navbar-nav">
       <span class="navbar-text d-sm-none d-md-block" *ngIf="user">
         {{ user.name }}
-        <span class="badge badge-pill">({{user.punten}} ptn.)</span>
+        <span class="badge badge-pill">{{user.punten}}</span>
       </span>
       <li class="nav-item" *ngIf="!user">
         <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>

@@ -16,8 +16,8 @@ export class DetailsComponent implements OnInit {
 
   }
 
-  taakToevoegen() {
-
+  taakToevoegen(description: string) {
+    this.taak.description = description;
   }
 
 }
