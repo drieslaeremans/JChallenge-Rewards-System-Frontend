@@ -24,7 +24,6 @@ export class AuthService {
   }
 
   meldAan(email: string, password: string) {
-    console.log('in meldAan');
     return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
       .subscribe(
         (res) => {
@@ -34,7 +33,6 @@ export class AuthService {
         },
         (error) => {
           this.setMessage('Foutieve login', 'alert-danger');
-          console.log('Foutieve login');
         }
       );
   }
@@ -53,7 +51,8 @@ export class AuthService {
         name: user.name,
         password: '',
         type: user.type,
-        punten: user.punten || 150
+        punten: user.points,
+        target: user.target
       });
       localStorage.setItem('userToken', user.token);
       this.router.navigate(['/home']);

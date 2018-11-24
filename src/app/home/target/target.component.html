@@ -1,0 +1,17 @@
+<div class="row" *ngIf="(targetReward.target != 0)">
+  <div class="col-sm-12 col-md-3 col-lg-2">
+    <h3>{{targetReward['title']}}</h3>
+  </div>
+  <div class="col-sm-12 col-md-9 col-lg-10">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{targetReward['target']}}%">
+        {{berekenProcent()}}%
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="!(targetReward)">
+  <div class="col-md-6 d-flex justify-content-center">
+    <div class="loader"></div>
+  </div>
+</div>

@@ -5,4 +5,5 @@ export class User {
   password: string;
   type: string;
   punten: number;
+  target: string;
 }
