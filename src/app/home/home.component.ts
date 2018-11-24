@@ -25,4 +25,12 @@ export class HomeComponent implements OnInit {
     this.authService.userData$.subscribe(data => this.user = data);
   }
 
+  setTaskFeed(limit: number) {
+    this.takenfeed$ = this.tasksService.getTaskFeed(limit);
+  }
+
+  setRewardFeed(limit: number) {
+    this.rewardFeed$ = this.rewardsService.getRewardFeed();
+  }
+
 }
