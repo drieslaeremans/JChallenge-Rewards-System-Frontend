@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {RewardsService} from '../services/rewards.service';
+import {RewardTemplate} from '../interfaces/reward-template';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-admin-rewards',
@@ -7,9 +10,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminRewardsComponent implements OnInit {
 
-  constructor() { }
+  rewardTemplates$;
+  reward: RewardTemplate;
+  createNew: boolean;
+  closeResult: string;
+
+  constructor(private rewardsService: RewardsService, private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+    this.createNew = true;
   }
 
+  deleteReward(rewardId: string) {
+    this.rewardsService.deleteRewardTemplate(rewardId);
+    this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+  }
+
+  setEditReward(reward: RewardTemplate) {
+    this.reward = reward;
+    this.createNew = false;
+  }
+
+  setCreateNew() {
+    this.createNew = true;
+    this.reward = new RewardTemplate();
+  }
+
+  saveReward() {
+    if (this.createNew) {
+      this.rewardsService.addRewardTemplate(this.reward);
+    } else {
+      this.rewardsService.updateRewardTemplate(this.reward);
+    }
+
+    this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 }

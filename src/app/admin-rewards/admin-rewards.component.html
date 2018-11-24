@@ -1,3 +1,73 @@
-<p>
-  admin-rewards works!
-</p>
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Titel</th>
+        <th scope="col">Beschrijving</th>
+        <th scope="col">Aantal punten</th>
+        <th>
+          <a href="javascript:void(0)" (click)="setCreateNew(); open(content)"><i class="fas fa-plus" style="color: #71B643"></i></a>
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngIf="(rewardTemplates$ | async)">
+      <tr *ngFor="let reward of (rewardTemplates$ | async)">
+        <td>{{reward.title}}</td>
+        <td>{{reward.description}}</td>
+        <td>{{reward.points}}</td>
+        <td>
+          <p>
+            <a href="javascript:void(0)" (click)="deleteReward(reward._id)"><i class="fas fa-trash-alt" style="color: #F49900"></i></a> |
+            <a href="javascript:void(0)" (click)="setEditReward(reward); open(content)"><i class="fas fa-edit" style="color: #08ACE1"></i></a>
+          </p>
+        </td>
+      </tr>
+      </tbody>
+      <tbody *ngIf="!(rewardTemplates$ | async)">
+      <tr>
+        <td rowspan="3 d-flex justify-content-center"><div class="loading"></div></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #content let-modal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"><span *ngIf="!createNew">Update</span><span *ngIf="createNew">Maak</span> geschenk</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm">
+        <div class="row">
+          <div class="form-group col-sm-12 col-md-6">
+            <label for="title">Titel</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Titel"
+                   required
+                   #title="ngModel"
+                   [(ngModel)]="reward.title">
+          </div>
+          <div class="form-group col-sm-12 col-md-6">
+            <label for="points">Aantal punten</label>
+            <input type="number" class="form-control" name="points" id="points" placeholder="Aantal punten"
+                   required
+                   #points="ngModel"
+                   [(ngModel)]="reward.points">
+          </div>
+          <div class="form-group col-sm-12">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Beschrijving"
+                   required
+                   #description="ngModel"
+                   [(ngModel)]="reward.description">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="saveReward(); c('Close click')">Save</button>
+    </div>
+  </ng-template>
+</div>

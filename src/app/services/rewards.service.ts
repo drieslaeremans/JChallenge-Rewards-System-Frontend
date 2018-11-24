@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {RewardTemplate} from '../interfaces/reward-template';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,13 @@ export class RewardsService {
   readonly GET_REWARDS_TEMPLATE_LOCAL = 'http://localhost:3000/v1/reward/template';
 
   readonly DELETE_REWARD_TEMPLATE = 'https://fast-temple-89292.herokuapp.com/v1/reward/template/delete/';
-  readonly DELETE_REWARD_TEMPLATE_LOCAL = 'http://localhost:3000/v1/reward/template/delete/';
+  readonly DELETE_REWARD_TEMPLATE_LOCAL = 'http://localhost:3000/v1/reward/template';
 
   readonly ADD_REWARDS_API = 'https://fast-temple-89292.herokuapp.com/v1/reward/template/add';
   readonly ADD_REWARDS_API_LOCAL = 'http://localhost:3000/v1/reward/template/add';
+
+  readonly UPDATE_REWARDS_API = 'https://fast-temple-89292.herokuapp.com/v1/reward/template';
+  readonly UPDATE_REWARDS_API_LOCAL = 'http://localhost:3000/v1/reward/template';
 
   readonly GET_REWARDS_FEED = 'https://fast-temple-89292.herokuapp.com/v1/rewards/feed';
   readonly GET_REWARDS_FEED_LOCAL = 'http://localhost:3000/v1/rewards/feed';
@@ -38,19 +42,30 @@ export class RewardsService {
     return this.http.get<any[]>(this.GET_REWARDS_FEED_LOCAL + '/' + limit);
   }
 
-  addRewardTemplate(title: string, points: number, description: string) {
+  addRewardTemplate(reward: RewardTemplate) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('userToken'),
-      // 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQWRtaW4iLCJpYXQiOjE1NDI4ODA3ODQsImlzcyI6InRlYW0xMSJ9.S7D36j82q9dgosWoW0zNn5NiALmVZjvYiQCBaWxvBEE'
     });
 
     this.http.post(this.ADD_REWARDS_API_LOCAL,
-      {title, points, description}, {headers : headers}).toPromise()
+      {title: reward.title, points: reward.points, description: reward.description}, {headers : headers}).toPromise()
       .then( (message) => console.log(message['message']));
   }
 
+  updateRewardTemplate(reward: RewardTemplate) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('userToken'),
+    });
+
+    this.http.put(this.UPDATE_REWARDS_API_LOCAL + '/' + reward._id,
+      {title: reward.title, points: reward.points, description: reward.description}, {headers: headers}).toPromise()
+      .then((message) => console.log(message['message']));
+  }
+
   deleteRewardTemplate(templateId: string) {
-    this.http.delete(this.DELETE_REWARD_TEMPLATE_LOCAL + '/' + templateId);
+    this.http.delete(this.DELETE_REWARD_TEMPLATE_LOCAL + '/' + templateId).toPromise()
+      .then((message) => console.log(message['message']));
   }
 }

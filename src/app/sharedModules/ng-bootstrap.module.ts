@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  NgbCollapseModule
+  NgbCollapseModule,
+  NgbModalModule,
 } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
-    NgbCollapseModule.forRoot()
+    NgbCollapseModule.forRoot(),
+    NgbModalModule.forRoot()
   ],
   exports: [
-    NgbCollapseModule
+    NgbCollapseModule,
+    NgbModalModule
   ],
   declarations: []
 })
