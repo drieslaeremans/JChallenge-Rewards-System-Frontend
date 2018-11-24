@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ import { AdminRewardsModule } from './admin-rewards/admin-rewards.module';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AdminTasksModule,
-    AdminRewardsModule
+    AdminRewardsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
