@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RewardsService} from '../services/rewards.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {UserRequestService} from '../services/user-request.service';
 
 @Component({
   selector: 'app-winkel',
@@ -9,9 +9,9 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class WinkelComponent implements OnInit {
   rewards$;
-  closeResult: string;
+  reward;
 
-  constructor(public rewardsService: RewardsService, private modalService: NgbModal) {
+  constructor(public rewardsService: RewardsService, public userRequestService: UserRequestService) {
   }
 
   ngOnInit() {
@@ -19,27 +19,17 @@ export class WinkelComponent implements OnInit {
   }
 
   koop(id) {
+    this.reward = this.rewardsService.getRewardTemplateById(id);
+    this.userRequestService.addUserReward(this.reward);
     console.log('bought reward with id: ', id);
   }
 
   addTarget(id) {
     console.log('added reward with id: ', id, ' as target');
   }
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
+  open(id) {
+    if (confirm("wil je deze punten wisselen?")){
+      this.koop(id);
     }
   }
 }
