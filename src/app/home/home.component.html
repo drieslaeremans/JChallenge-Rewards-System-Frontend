@@ -1,23 +1,35 @@
+
 <div class="row">
   <div class="col-12">
-    <div class="row">
-      <div class="col-12">
-        <h1>Punten: {{user.punten}}</h1>
-      </div>
-    </div>
     <app-target [userPunten]="user.punten"></app-target>
-
-  </div>
-  <div class="col-md-9"></div>
-  <div class="col-md-3">
-    <div class="row" *ngFor="let feed of (takenfeed$ | async)">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{feed.title}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{feed.points}}</h6>
-          <p class="card-text">{{feed.description}}</p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
+
+  <div class="row" >
+    <div class="col-sm-12 col-lg-6">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          Uitgevoerde opdrachten
+        </li>
+        <li class="list-group-item" *ngFor="let feed of (takenfeed$ | async)">
+          {{feed.text}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 d-lg-none">
+      <br>
+      <hr/>
+      <br>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          Opgenomen rewards
+        </li>
+        <li class="list-group-item" *ngFor="let feed of (rewardFeed$ | async)">
+          {{feed.text}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
