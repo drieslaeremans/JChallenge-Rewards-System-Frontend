@@ -31,7 +31,7 @@ export class UserRequestService {
 
   addUserTask(task: TaskTemplate) {
     const headers = new HttpHeaders({
-      'Content-Ty  pe': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('userToken'),
     });
 

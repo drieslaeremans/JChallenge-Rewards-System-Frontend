@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-12">
-    <h4>Overzicht van alle opdrachten</h4>
+    <h1>Opdrachten</h1>
   </div>
   <br/>
   <div class="col-md-4 list-group">
     <div *ngFor="let task of (tasks$ | async)">
-      <button type="button" (click)="changeTask(task)" class="list-group-item list-group-item-action">
+      <button type="button" (click)="changeTask(task)" class="list-group-item list-group-item-action" style="margin-bottom: 10px; margin-left: 15px;">
         {{ task.title }}
         <span class="badge badge-pill float-right">{{ task.points }}</span>
       </button>

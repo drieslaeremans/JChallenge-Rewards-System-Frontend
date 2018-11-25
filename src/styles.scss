@@ -127,6 +127,10 @@ a.card-link {
   color: #F49900 !important;
 }
 
+a.card-link.buy {
+  font-weight: bold;
+}
+
 .card-footer a {
   cursor: pointer;
 }
