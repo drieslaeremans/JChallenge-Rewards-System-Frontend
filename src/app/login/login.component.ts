@@ -21,10 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('loginData')) {
-      this.loginData = JSON.parse(localStorage.getItem('loginData'));
-    }
-      this.authService.alertBox$.subscribe(data => {
+    this.authService.alertBox$.subscribe(data => {
        this.alertBox = data;
     });
   }

@@ -46,17 +46,12 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    let points = Number();
     this.http.put(this.ADD_USER_REWARD_LOCAL,
       {title: reward.title, points: reward.points, description: reward.description}, {headers}).toPromise()
       .then((req) => {
         console.log(req['message']);
-        points = req['points'];
       });
-
-    return points;
   }
-
 
   approveTask(taskId: string) {
     const headers = new HttpHeaders({

@@ -26,10 +26,9 @@ export class WinkelComponent implements OnInit {
 
   koop(reward: RewardTemplate) {
     if (confirm('Wil je je punten inwisselen voor deze prijs?')) {
-      console.log(reward);
-      const userPunten = this.userRequestService.addUserReward(reward);
-      console.log('userPunten', userPunten);
+      this.userRequestService.addUserReward(reward);
       this.user.punten = (this.user.punten - reward.points);
+      console.log(this.user.punten);
       this.authService.changePoints(this.user);
     }
   }
