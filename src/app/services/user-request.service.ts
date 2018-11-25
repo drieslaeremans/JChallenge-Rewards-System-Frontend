@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TaskTemplate} from '../interfaces/task-template';
 import {RewardTemplate} from '../interfaces/reward-template';
 import {Observable} from 'rxjs';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -39,18 +40,24 @@ export class UserRequestService {
       .then((req) => console.log(req['message']));
   }
 
-  addUserReward(reward: RewardTemplate) {
+  addUserReward(reward: RewardTemplate){
     console.log(reward.title);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.put(this.ADD_USER_REWARD_LOCAL,
-      {title: reward.title, points: reward.points, description: reward.description}, {headers}).toPromise()
-      .then((req) => {
-        console.log(req['message']);
-      });
+    var points = Number();
+
+    return new Promise(resolve => {
+      this.http.put(this.ADD_USER_REWARD_LOCAL,
+        {title: reward.title, points: reward.points, description: reward.description}, {headers}).toPromise()
+        .then((req) => {
+          console.log(parseInt(req['points']));
+          points = req['points'];
+          resolve(points);
+        });
+    });
   }
 
   approveTask(taskId: string) {
