@@ -17,6 +17,9 @@
         <a class="nav-link" routerLink="/winkel" routerLinkActive="active" *ngIf='user && user.type=="worker"'>Winkel</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" routerLink="/requests" routerLinkActive="active" *ngIf='user && user.type=="admin"'>Requests afhandelen</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" routerLink="/tasksettings" routerLinkActive="active" *ngIf='user && user.type=="admin"'>Opdrachten beheren</a>
       </li>
       <li class="nav-item">

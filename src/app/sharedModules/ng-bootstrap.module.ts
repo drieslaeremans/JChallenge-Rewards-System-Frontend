@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import {
   NgbCollapseModule,
   NgbModalModule,
+  NgbTabsetModule
 } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     NgbCollapseModule.forRoot(),
-    NgbModalModule.forRoot()
+    NgbModalModule.forRoot(),
+    NgbTabsetModule
   ],
   exports: [
     NgbCollapseModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbTabsetModule
   ],
   declarations: []
 })

@@ -10,6 +10,7 @@ import {UserGuard} from './guards/user.guard';
 import {AdminRewardsComponent} from './admin-rewards/admin-rewards.component';
 import {AdminGuard} from './guards/admin.guard';
 import {AdminTasksComponent} from './admin-tasks/admin-tasks.component';
+import {AdminHandleRequestsComponent} from './admin-handle-requests/admin-handle-requests.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [UserGuard] },
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'rewardsettings', component: AdminRewardsComponent, canActivate: [AdminGuard]},
   {path: 'tasksettings', component: AdminTasksComponent, canActivate: [AdminGuard]},
+  {path: 'requests', component: AdminHandleRequestsComponent, canActivate: [AdminGuard]},
   {path: '', component: HomeComponent, canActivate: [UserGuard]},
   {path: '**', component: PageNotFoundComponent}
 ];

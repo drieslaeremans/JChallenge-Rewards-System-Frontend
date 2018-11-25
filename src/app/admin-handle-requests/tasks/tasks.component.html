@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6" *ngFor="let list of (taskLijst$ | async)">
+    <div class="card">
+      <div class="card-header">
+        {{list.user}}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item justify-content-between" *ngFor="let taak of list['tasks']">
+          <span >{{taak.title}}</span>
+          <span >{{taak.description}}</span>
+          <span >{{taak.points}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

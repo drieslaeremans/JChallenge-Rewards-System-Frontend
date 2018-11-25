@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { FooterComponent } from './footer/footer.component';
 import { AdminTasksModule } from './admin-tasks/admin-tasks.module';
 import { AdminRewardsModule } from './admin-rewards/admin-rewards.module';
+import { AdminHandleRequestsModule } from './admin-handle-requests/admin-handle-requests.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AdminRewardsModule } from './admin-rewards/admin-rewards.module';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AdminTasksModule,
-    AdminRewardsModule
+    AdminRewardsModule,
+    AdminHandleRequestsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
