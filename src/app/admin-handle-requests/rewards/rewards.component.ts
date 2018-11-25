@@ -13,7 +13,7 @@ export class RewardsComponent implements OnInit {
   constructor(private urService: UserRequestService) { }
 
   ngOnInit() {
-    this.rewardLijst$ = this.urService.getAllUserRewards();
+    this.rewardLijst$ = this.urService.getAllUsersRewards();
   }
 
   rewardGoedkeuren(rewardId) {

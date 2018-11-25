@@ -13,7 +13,7 @@ export class TasksComponent implements OnInit {
   constructor(private urService: UserRequestService) { }
 
   ngOnInit() {
-    this.taskLijst$ = this.urService.getAllUserTasks();
+    this.taskLijst$ = this.urService.getAllUsersTasks();
   }
 
   taskGoedkeuren(taskId) {

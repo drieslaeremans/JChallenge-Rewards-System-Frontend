@@ -22,11 +22,14 @@ export class UserRequestService {
   readonly ACCEPT_TASK = 'https://fast-temple-89292.herokuapp.com/v1/user/task/accept';
   readonly ACCEPT_TASK_LOCAL = 'http://localhost:3000/v1/user/task/accept';
 
-  readonly GET_ALL_USER_REWARDS = 'https://fast-temple-89292.herokuapp.com/v1/users/rewards';
-  readonly GET_ALL_USER_REWARDS_LOCAL = 'http://localhost:3000/v1/users/rewards';
+  readonly GET_ALL_USERS_REWARDS = 'https://fast-temple-89292.herokuapp.com/v1/users/rewards';
+  readonly GET_ALL_USERS_REWARDS_LOCAL = 'http://localhost:3000/v1/users/rewards';
 
-  readonly GET_ALL_USER_TASKS = 'https://fast-temple-89292.herokuapp.com/v1/users/tasks';
-  readonly GET_ALL_USER_TASKS_LOCAL = 'http://localhost:3000/v1/users/tasks';
+  readonly GET_ALL_USERS_TASKS = 'https://fast-temple-89292.herokuapp.com/v1/users/tasks';
+  readonly GET_ALL_USERS_TASKS_LOCAL = 'http://localhost:3000/v1/users/tasks';
+
+  readonly GET_ALL_USER_TASKS_LOCAL = 'http://localhost:3000/v1/user/tasks';
+  readonly GET_ALL_USER_REWARDS_LOCAL = 'http://localhost:3000/v1/user/rewards';
 
   constructor(private http: HttpClient) { }
 
@@ -83,12 +86,29 @@ export class UserRequestService {
       .catch((req) => console.warn(req['message']));
   }
 
+  getAllUsersRewards(): Observable<any> {
+    return this.http.get<any[]>(this.GET_ALL_USERS_REWARDS_LOCAL);
+  }
+
+  getAllUsersTasks(): Observable<any> {
+    return this.http.get<any[]>(this.GET_ALL_USERS_TASKS_LOCAL);
+  }
+
   getAllUserRewards(): Observable<any> {
-    return this.http.get<any[]>(this.GET_ALL_USER_REWARDS_LOCAL);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('userToken'),
+    });
+    console.log(this.http.get<any[]>(this.GET_ALL_USER_REWARDS_LOCAL, {headers}));
+    return this.http.get<any[]>(this.GET_ALL_USER_REWARDS_LOCAL, {headers});
   }
 
   getAllUserTasks(): Observable<any> {
-    return this.http.get<any[]>(this.GET_ALL_USER_TASKS_LOCAL);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('userToken'),
+    });
+    return this.http.get<any[]>(this.GET_ALL_USER_TASKS_LOCAL, {headers});
   }
 }
 
