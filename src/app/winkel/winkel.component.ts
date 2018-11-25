@@ -11,14 +11,14 @@ export class WinkelComponent implements OnInit {
   rewards$;
   reward;
 
-  constructor(public rewardsService: RewardsService, public userRequestService: UserRequestService) {
+  constructor(private rewardsService: RewardsService, private userRequestService: UserRequestService) {
   }
 
   ngOnInit() {
     this.rewards$ = this.rewardsService.getRewardTemplates();
   }
 
-  koop(id) {
+  private koop(id) {
     this.reward = this.rewardsService.getRewardTemplateById(id);
     this.userRequestService.addUserReward(this.reward);
     console.log('bought reward with id: ', id);

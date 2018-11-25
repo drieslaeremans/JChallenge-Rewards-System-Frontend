@@ -31,7 +31,7 @@ export class UserRequestService {
 
   addUserTask(task: TaskTemplate) {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Ty  pe': 'application/json',
       'Authorization': localStorage.getItem('userToken'),
     });
 
@@ -56,7 +56,7 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.patch('', {taskId}, {headers}).toPromise()
+    this.http.patch(this.ACCEPT_TASK_LOCAL, {taskId}, {headers}).toPromise()
       .then((req) => console.log(req['message']))
       .catch((req) => console.warn(req['message']));
 
@@ -68,7 +68,7 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.patch('', {rewardId}, {headers}).toPromise()
+    this.http.patch(this.ACCEPT_REWARD_LOCAL, {rewardId}, {headers}).toPromise()
       .then((req) => console.log(req['message']))
       .catch((req) => console.warn(req['message']));
   }
@@ -81,3 +81,4 @@ export class UserRequestService {
     return null;
   }
 }
+

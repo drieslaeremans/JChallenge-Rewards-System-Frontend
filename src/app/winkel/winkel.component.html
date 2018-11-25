@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-      <h1>Punten: 10</h1>
+      <h1>Winkel</h1>
       <div class="col-12">
         <div class="row">
           <div class="card" *ngFor="let reward of (rewards$ | async)" style="width: 18rem;">
@@ -9,8 +9,8 @@
               <h5 class="card-title">{{reward.title}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{{reward.points}} punten</h6>
               <p class="card-text">{{reward.description}}</p>
-              <a (click)="open(reward._id)" class="btn btn-orange">Punten inwisselen</a>
-              <a (click)="addTarget(reward._id)" class="btn btn-orange">Instellen als target</a>
+              <a (click)="open(reward._id)" class="card-link">Punten inwisselen</a>
+              <a (click)="addTarget(reward._id)" class="card-link">Instellen als target</a>
             </div>
           </div>
         </div>

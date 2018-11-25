@@ -4,12 +4,14 @@ import { User } from '../interfaces/user';
 import {HttpClient} from '@angular/common/http';
 import {AlertBox} from '../interfaces/alert-box';
 import {Router} from '@angular/router';
+import {LoginComponent} from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  loading: boolean;
   alertBox$: BehaviorSubject<AlertBox> = new BehaviorSubject(null);
   userData$: BehaviorSubject<User> = new BehaviorSubject(null);
   readonly LOGIN_API_URL = 'https://fast-temple-89292.herokuapp.com/v1/user/login';
@@ -24,6 +26,7 @@ export class AuthService {
   }
 
   meldAan(email: string, password: string) {
+    this.loading = true;
     return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
       .subscribe(
         (res) => {
