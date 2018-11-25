@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="row p-2">
-  <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let reward of (rewards$ | async)">
+  <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let reward of (rewards$ | async)" style="margin-bottom: 20px;">
     <div class="card" style="height: 100%;">
       <div class="card-body">
         <h5 class="card-title">{{reward.title}}</h5>
@@ -12,7 +12,7 @@
         <p class="card-text"> {{reward.description}}</p>
       </div>
       <div class="card-footer">
-        <a (click)="koop(reward)" *ngIf='user.punten >= reward.points' class="card-link">Kopen</a>
+        <a (click)="koop(reward)" *ngIf='user.punten >= reward.points' class="card-link buy">Kopen</a>
         <a (click)="addTarget(reward._id)" class="card-link">Instellen als target</a>
       </div>
     </div>
