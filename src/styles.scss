@@ -12,9 +12,6 @@ $theme-colors: (
 // Eigen code/partials
 body {
   background-color: #f4f4f4;
-}
-
-body {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -124,4 +121,8 @@ a.feed-link:visited {
 }
 a.feed-link:active{
   color: gray;
+}
+
+a.card-link {
+  color: #F49900 !important;
 }

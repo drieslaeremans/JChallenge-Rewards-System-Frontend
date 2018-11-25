@@ -24,7 +24,7 @@ export class TargetService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.post(this.SET_USER_TARGET_LOCAL, {rewardId})
+    this.http.post(this.SET_USER_TARGET_LOCAL, {rewardId}, {headers : headers})
       .toPromise().then((message) => console.log(message['message']));
   }
 
