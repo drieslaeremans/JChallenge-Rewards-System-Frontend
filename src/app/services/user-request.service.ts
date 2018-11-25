@@ -4,32 +4,22 @@ import {TaskTemplate} from '../interfaces/task-template';
 import {RewardTemplate} from '../interfaces/reward-template';
 import {Observable} from 'rxjs';
 import { promise } from 'protractor';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserRequestService {
 
-  readonly ADD_USER_TASK = 'https://fast-temple-89292.herokuapp.com/v1/user/task/add';
-  readonly ADD_USER_TASK_LOCAL = 'http://localhost:3000/v1/user/task/add';
-
-  readonly ADD_USER_REWARD = 'https://fast-temple-89292.herokuapp.com/v1/user/reward/add';
-  readonly ADD_USER_REWARD_LOCAL = 'http://localhost:3000/v1/user/reward/add';
-
-  readonly ACCEPT_REWARD = 'https://fast-temple-89292.herokuapp.com/v1/user/reward/accept';
-  readonly ACCEPT_REWARD_LOCAL = 'http://localhost:3000/v1/user/reward/accept';
-
-  readonly ACCEPT_TASK = 'https://fast-temple-89292.herokuapp.com/v1/user/task/accept';
-  readonly ACCEPT_TASK_LOCAL = 'http://localhost:3000/v1/user/task/accept';
-
-  readonly GET_ALL_USERS_REWARDS = 'https://fast-temple-89292.herokuapp.com/v1/users/rewards';
-  readonly GET_ALL_USERS_REWARDS_LOCAL = 'http://localhost:3000/v1/users/rewards';
-
-  readonly GET_ALL_USERS_TASKS = 'https://fast-temple-89292.herokuapp.com/v1/users/tasks';
-  readonly GET_ALL_USERS_TASKS_LOCAL = 'http://localhost:3000/v1/users/tasks';
-
-  readonly GET_ALL_USER_TASKS_LOCAL = 'http://localhost:3000/v1/user/tasks';
-  readonly GET_ALL_USER_REWARDS_LOCAL = 'http://localhost:3000/v1/user/rewards';
+  api: string = environment.APIEndPoint;
+  readonly ADD_USER_TASK = this.api + '/user/task/add';
+  readonly ADD_USER_REWARD = this.api + '/user/reward/add';
+  readonly ACCEPT_REWARD = this.api + '/user/reward/accept';
+  readonly ACCEPT_TASK = this.api + '/user/task/accept';
+  readonly GET_ALL_USERS_REWARDS = this.api + '/users/rewards';
+  readonly GET_ALL_USERS_TASKS = this.api + '/users/tasks';
+  readonly GET_ALL_USER_TASKS = this.api + '/user/tasks';
+  readonly GET_ALL_USER_REWARDS = this.api + '/user/rewards';
 
   constructor(private http: HttpClient) { }
 
@@ -39,7 +29,7 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.put(this.ADD_USER_TASK_LOCAL, {title: task.title, points: task.points, description: task.description}, {headers}).toPromise()
+    this.http.put(this.ADD_USER_TASK, {title: task.title, points: task.points, description: task.description}, {headers}).toPromise()
       .then((req) => console.log(req['message']));
   }
 
@@ -53,7 +43,7 @@ export class UserRequestService {
     var points = Number();
 
     return new Promise(resolve => {
-      this.http.put(this.ADD_USER_REWARD_LOCAL,
+      this.http.put(this.ADD_USER_REWARD,
         {title: reward.title, points: reward.points, description: reward.description}, {headers}).toPromise()
         .then((req) => {
           console.log(parseInt(req['points']));
@@ -69,7 +59,7 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.patch(this.ACCEPT_TASK_LOCAL, {taskId}, {headers}).toPromise()
+    this.http.patch(this.ACCEPT_TASK, {taskId}, {headers}).toPromise()
       .then((req) => console.log(req['message']))
       .catch((req) => console.warn(req['message']));
 
@@ -81,17 +71,17 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.patch(this.ACCEPT_REWARD_LOCAL, {rewardId}, {headers}).toPromise()
+    this.http.patch(this.ACCEPT_REWARD, {rewardId}, {headers}).toPromise()
       .then((req) => console.log(req['message']))
       .catch((req) => console.warn(req['message']));
   }
 
   getAllUsersRewards(): Observable<any> {
-    return this.http.get<any[]>(this.GET_ALL_USERS_REWARDS_LOCAL);
+    return this.http.get<any[]>(this.GET_ALL_USERS_REWARDS);
   }
 
   getAllUsersTasks(): Observable<any> {
-    return this.http.get<any[]>(this.GET_ALL_USERS_TASKS_LOCAL);
+    return this.http.get<any[]>(this.GET_ALL_USERS_TASKS);
   }
 
   getAllUserRewards(): Observable<any> {
@@ -99,8 +89,8 @@ export class UserRequestService {
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('userToken'),
     });
-    console.log(this.http.get<any[]>(this.GET_ALL_USER_REWARDS_LOCAL, {headers}));
-    return this.http.get<any[]>(this.GET_ALL_USER_REWARDS_LOCAL, {headers});
+    console.log(this.http.get<any[]>(this.GET_ALL_USER_REWARDS, {headers}));
+    return this.http.get<any[]>(this.GET_ALL_USER_REWARDS, {headers});
   }
 
   getAllUserTasks(): Observable<any> {
@@ -108,7 +98,7 @@ export class UserRequestService {
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('userToken'),
     });
-    return this.http.get<any[]>(this.GET_ALL_USER_TASKS_LOCAL, {headers});
+    return this.http.get<any[]>(this.GET_ALL_USER_TASKS, {headers});
   }
 }
 

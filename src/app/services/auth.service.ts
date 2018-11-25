@@ -4,17 +4,18 @@ import { User } from '../interfaces/user';
 import {HttpClient} from '@angular/common/http';
 import {AlertBox} from '../interfaces/alert-box';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  api: string = environment.APIEndPoint;
   loading: boolean;
   alertBox$: BehaviorSubject<AlertBox> = new BehaviorSubject(null);
   userData$: BehaviorSubject<User> = new BehaviorSubject(null);
-  readonly LOGIN_API_URL = 'https://fast-temple-89292.herokuapp.com/v1/user/login';
-  readonly LOGIN_API_URL_LOCAL = 'http://localhost:3000/v1/user/login';
+  readonly LOGIN_API_URL = this.api + '/user/login';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,7 +26,7 @@ export class AuthService {
 
   meldAan(email: string, password: string) {
     this.loading = true;
-    return this.http.post(this.LOGIN_API_URL_LOCAL, {email, password})
+    return this.http.post(this.LOGIN_API_URL, {email, password})
       .subscribe(
         (res) => {
           this.setMessage('Aanmelden gelukt. Even geduld', 'alert-success');

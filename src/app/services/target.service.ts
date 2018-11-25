@@ -2,18 +2,16 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Target} from '../interfaces/target';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TargetService {
 
-  readonly SET_USER_TARGET = 'https://fast-temple-89292.herokuapp.com/v1/user/target';
-  readonly SET_USER_TARGET_LOCAL = 'http://localhost:3000/v1/user/target';
-
-  readonly GET_USER_TARGET = 'https://fast-temple-89292.herokuapp.com/v1/user/target';
-  readonly GET_USER_TARGET_LOCAL = 'http://localhost:3000/v1/user/target';
-
+  api: string = environment.APIEndPoint;
+  readonly SET_USER_TARGET = this.api + '/user/target';
+  readonly GET_USER_TARGET = this.api + '/user/target';
   target: Target = new Target();
 
   constructor(private http: HttpClient) { }
@@ -24,7 +22,7 @@ export class TargetService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.post(this.SET_USER_TARGET_LOCAL, {rewardId}, {headers : headers})
+    this.http.post(this.SET_USER_TARGET, {rewardId}, {headers : headers})
       .toPromise().then((message) => console.log(message['message']));
   }
 
@@ -34,7 +32,7 @@ export class TargetService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.get(this.GET_USER_TARGET_LOCAL, {headers: headers}).toPromise()
+    this.http.get(this.GET_USER_TARGET, {headers: headers}).toPromise()
       .then((res) => {
         this.target.title = res['title'];
         this.target.target = res['target'];
@@ -44,7 +42,6 @@ export class TargetService {
         this.target.target = 0;
       });
 
-    console.log(this.target);
     return this.target;
   }
 

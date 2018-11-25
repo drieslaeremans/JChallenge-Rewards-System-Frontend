@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  APIEndPoint: 'https://fast-temple-89292.herokuapp.com/v1'
+  APIEndPoint: 'http://localhost:3000/v1'
 };
 
 /*
