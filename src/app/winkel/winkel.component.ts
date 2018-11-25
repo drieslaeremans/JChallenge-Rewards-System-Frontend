@@ -4,6 +4,7 @@ import {UserRequestService} from '../services/user-request.service';
 import {TargetService} from '../services/target.service';
 import {AuthService} from '../services/auth.service';
 import {User} from '../interfaces/user';
+import {RewardTemplate} from '../interfaces/reward-template';
 
 @Component({
   selector: 'app-winkel',
@@ -12,7 +13,6 @@ import {User} from '../interfaces/user';
 })
 export class WinkelComponent implements OnInit {
   rewards$;
-  reward;
   user: User;
 
   constructor(private rewardsService: RewardsService, private userRequestService: UserRequestService,
@@ -24,21 +24,20 @@ export class WinkelComponent implements OnInit {
     this.authService.userData$.subscribe(data => this.user = data);
   }
 
-  private koop(id) {
-    this.reward = this.rewardsService.getRewardTemplateById(id);
-    this.userRequestService.addUserReward(this.reward);
-    console.log('bought reward with id: ', id);
+  koop(reward: RewardTemplate) {
+    if (confirm('Wil je je punten inwisselen voor deze prijs?')) {
+      console.log(reward);
+      const userPunten = this.userRequestService.addUserReward(reward);
+      console.log('userPunten', userPunten);
+      this.user.punten = (this.user.punten - reward.points);
+      this.authService.changePoints(this.user);
+    }
   }
 
   addTarget(id) {
     if (confirm('Wilt u dit als target instellen?')) {
       this.targetService.setUserTarget(id);
       console.log('added reward with id: ', id, ' as target');
-    }
-  }
-  open(id) {
-    if (confirm('Wil je deze punten wisselen?')) {
-      this.koop(id);
     }
   }
 }

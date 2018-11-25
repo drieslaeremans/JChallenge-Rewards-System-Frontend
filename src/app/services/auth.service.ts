@@ -19,7 +19,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string) {
-    console.log('in login');
     this.logout();
     this.meldAan(email, password);
   }
@@ -31,7 +30,6 @@ export class AuthService {
         (res) => {
           this.setMessage('Aanmelden gelukt. Even geduld', 'alert-success');
           this.setUserData(res);
-          console.log(res);
         },
         (error) => {
           this.setMessage('Foutieve login', 'alert-danger');
@@ -64,6 +62,22 @@ export class AuthService {
     }
 
     this.loading = false;
+  }
+
+  changePoints(user) {
+    if (user !== null) {
+      this.userData$.next({
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        password: '',
+        type: user.type,
+        punten: user.points,
+        target: user.target
+      });
+    } else {
+      this.userData$.next(null);
+    }
   }
 
   // Message BS4 alert-box

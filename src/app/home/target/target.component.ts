@@ -27,6 +27,8 @@ export class TargetComponent implements OnInit {
     this.percentage = ((this.userPunten / this.targetReward.target) * 100);
     if (isNaN(this.percentage)) {
       return '0%';
+    } else if (this.percentage > 100) {
+      return '100%';
     }
     return (this.percentage + '%');
   }

@@ -20,8 +20,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.takenfeed$ = this.tasksService.getTaskFeed();
     this.rewardFeed$ = this.rewardsService.getRewardFeed();
-    console.log(this.rewardFeed$);
-    console.log(this.takenfeed$);
     this.authService.userData$.subscribe(data => this.user = data);
   }
 

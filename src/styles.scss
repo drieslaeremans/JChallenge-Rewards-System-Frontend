@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
   background-color: #ffffff;
-  max-width: 1300px;
+  //max-width: 1300px;
 }
 
 .navbar-brand img {
@@ -125,4 +125,8 @@ a.feed-link:active{
 
 a.card-link {
   color: #F49900 !important;
+}
+
+.card-footer a {
+  cursor: pointer;
 }

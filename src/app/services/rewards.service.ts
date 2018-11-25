@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {RewardTemplate} from '../interfaces/reward-template';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +32,14 @@ export class RewardsService {
   constructor(private http: HttpClient) { }
 
   getRewardTemplates(): Observable<any[]> {
-    return this.http.get<any[]>(this.GET_REWARDS_TEMPLATES_LOCAL);
+    return this.http.get<any[]>(this.GET_REWARDS_TEMPLATES_LOCAL).pipe(
+      tap(results => {
+        results.sort((a, b) => a.points < b.points ? -1 : 1);
+      })
+    );
   }
 
-  getRewardTemplateById(templateId): Observable<any> {
+  getRewardTemplateById(templateId): any {
     return this.http.get<any>(this.GET_REWARDS_TEMPLATE_LOCAL + '/' + templateId);
   }
 
