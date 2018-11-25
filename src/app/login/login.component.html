@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="col-md-3"></div>
-  <div class="col-md-6 col-sm-12" *ngIf="!loading">
+  <div class="col-md-6 col-sm-12" *ngIf="!authService.loading">
     <h4>Login</h4>
     <form #f="ngForm">
       <div class="form-group">
@@ -52,7 +52,7 @@
       </button>
     </form>
   </div>
-  <div class="col-md-6 d-flex justify-content-center" *ngIf="loading">
+  <div class="col-md-6 d-flex justify-content-center" *ngIf="authService.loading">
     <div class="loader"></div>
   </div>
   <div class="col-md-3"></div>

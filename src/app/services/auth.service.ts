@@ -4,7 +4,6 @@ import { User } from '../interfaces/user';
 import {HttpClient} from '@angular/common/http';
 import {AlertBox} from '../interfaces/alert-box';
 import {Router} from '@angular/router';
-import {LoginComponent} from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +35,7 @@ export class AuthService {
         },
         (error) => {
           this.setMessage('Foutieve login', 'alert-danger');
+          this.loading = false;
         }
       );
   }
@@ -63,7 +63,7 @@ export class AuthService {
       this.userData$.next(null);
     }
 
-    console.log('userdata', this.userData$);
+    this.loading = false;
   }
 
   // Message BS4 alert-box
