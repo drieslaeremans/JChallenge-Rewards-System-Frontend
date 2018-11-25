@@ -1,17 +1,19 @@
 <div class="row">
-  <div class="col-12" *ngFor="let list of (taskLijst$ | async)">
+  <div class="col-sm-12 col-md-6" *ngFor="let list of (taskLijst$ | async)">
     <div class="card">
       <div class="card-header">
         {{list.user}}
       </div>
-      <ul class="list-group list-group-item-danger" style="margin-bottom: 10px">
+      <ul class="list-group">
         <div *ngFor="let taak of list.tasks[0]">
-            <li class="list-group-item justify-content-between" *ngIf="taak.accepted === false">
-              <span>{{taak.title}}</span>
-              <span>{{taak.description}}</span>
-              <span> voor {{taak.points}} punten</span>
-              <br>
-              <button type="submit" (click)="taskGoedkeuren(taak._id)" class="btn btn-outline-secondary btn-orange">Goedkeuren</button>
+            <li class="list-group-item" *ngIf="taak.accepted === false">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mr-2">{{taak.title}}</div>
+                <div class="flex-fill">{{taak.description}} ({{taak.points}} punten)</div>
+                <div class="ml-1">
+                  <a href="javascript:void(0)" (click)="taskGoedkeuren(taak._id)">Bezorgd</a>
+                </div>
+              </div>
             </li>
         </div>
       </ul>
