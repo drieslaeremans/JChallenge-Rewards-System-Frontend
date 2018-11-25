@@ -12,13 +12,25 @@ import {User} from '../interfaces/user';
 })
 export class HomeComponent implements OnInit {
   takenfeed$;
+  rewardFeed$;
   user: User;
 
   constructor(public rewardsService: RewardsService, public tasksService: TasksService, private authService: AuthService) { }
 
   ngOnInit() {
     this.takenfeed$ = this.tasksService.getTaskFeed();
+    this.rewardFeed$ = this.rewardsService.getRewardFeed();
+    console.log(this.rewardFeed$);
+    console.log(this.takenfeed$);
     this.authService.userData$.subscribe(data => this.user = data);
+  }
+
+  setTaskFeed(limit: number) {
+    this.takenfeed$ = this.tasksService.getTaskFeed(limit);
+  }
+
+  setRewardFeed(limit: number) {
+    this.rewardFeed$ = this.rewardsService.getRewardFeed();
   }
 
 }

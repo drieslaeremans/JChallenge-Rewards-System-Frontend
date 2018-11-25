@@ -4,9 +4,9 @@
   <form #form>
     <div class="form-group">
       <label for="description">Beschrijf wat je gedaan hebt</label>
-      <textarea class="form-control" id="description" rows="3" #i #description="ngModel" [(ngModel)]="taak.description"></textarea>
+      <textarea class="form-control" id="description" rows="3" name="description" #description="ngModel" [(ngModel)]="taak.description"></textarea>
     </div>
-    <button type="submit" (click)="taakToevoegen(i.value)" class="btn btn-outline-secondary btn-orange col-12">Verzenden</button>
+    <button type="submit" (click)="taakToevoegen(description.value)" class="btn btn-outline-secondary btn-orange col-12">Verzenden</button>
   </form>
 </div>
 

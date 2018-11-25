@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RewardsService} from '../services/rewards.service';
-import {Observable} from 'rxjs';
+import {UserRequestService} from '../services/user-request.service';
 
 @Component({
   selector: 'app-winkel',
@@ -8,15 +8,28 @@ import {Observable} from 'rxjs';
   styles: []
 })
 export class WinkelComponent implements OnInit {
-  rewards$: Observable<any>;
-  constructor(public rewardsService: RewardsService) {
+  rewards$;
+  reward;
+
+  constructor(public rewardsService: RewardsService, public userRequestService: UserRequestService) {
   }
 
   ngOnInit() {
+    this.rewards$ = this.rewardsService.getRewardTemplates();
   }
 
-  koop() {
-    console.log(this.rewardsService.getRewardTemplates());
+  koop(id) {
+    this.reward = this.rewardsService.getRewardTemplateById(id);
+    this.userRequestService.addUserReward(this.reward);
+    console.log('bought reward with id: ', id);
   }
 
+  addTarget(id) {
+    console.log('added reward with id: ', id, ' as target');
+  }
+  open(id) {
+    if (confirm("wil je deze punten wisselen?")){
+      this.koop(id);
+    }
+  }
 }

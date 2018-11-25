@@ -13,6 +13,7 @@ import {Target} from '../../interfaces/target';
 export class TargetComponent implements OnInit {
 
   targetReward: Target;
+  percentage: number;
   @Input() userPunten: number;
 
   constructor(private targetService: TargetService, private rewardsService: RewardsService) { }
@@ -22,9 +23,12 @@ export class TargetComponent implements OnInit {
     console.log(this.targetReward);
   }
 
-  berekenProcent() {
-    const procent = (this.userPunten / this.targetReward.target) * 100;
-    return procent;
+  getStyle() {
+    this.percentage = ((this.userPunten / this.targetReward.target) * 100);
+    if (isNaN(this.percentage)) {
+      return '0%';
+    }
+    return (this.percentage + '%');
   }
 
 }
