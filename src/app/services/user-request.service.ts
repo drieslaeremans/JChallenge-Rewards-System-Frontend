@@ -25,7 +25,7 @@ export class UserRequestService {
   readonly GET_ALL_USER_REWARDS_LOCAL = 'http://localhost:3000/v1/users/rewards';
 
   readonly GET_ALL_USER_TASKS = 'https://fast-temple-89292.herokuapp.com/v1/users/tasks';
-  readonly GET_ALL_USER_TASKS_LOCAL = 'http://localhost:3000/v1/user/users/tasks';
+  readonly GET_ALL_USER_TASKS_LOCAL = 'http://localhost:3000/v1/users/tasks';
 
   constructor(private http: HttpClient) { }
 
@@ -77,11 +77,11 @@ export class UserRequestService {
   }
 
   getAllUserRewards(): Observable<any> {
-    return null;
+    return this.http.get<any[]>(this.GET_ALL_USER_REWARDS_LOCAL);
   }
 
   getAllUserTasks(): Observable<any> {
-    return null;
+    return this.http.get<any[]>(this.GET_ALL_USER_TASKS_LOCAL);
   }
 }
 
