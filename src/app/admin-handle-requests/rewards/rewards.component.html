@@ -1,5 +1,21 @@
 <div class="row">
-  <div class="col-sm-12 col-md-6" *ngFor="let list of (rewardLijst$ | async)">
-    <p>{{list['user']}}</p>
+    <div class="col-12" *ngFor="let list of (rewardLijst$ | async)">
+      <div class="card">
+        <div class="card-header">
+          {{list.user}}
+        </div>
+        <ul class="list-group list-group-item-danger" style="margin-bottom: 10px">
+          <div *ngFor="let reward of list.rewards[0]">
+              <li class="list-group-item justify-content-between" *ngIf="reward.accepted === false">
+                <span>{{reward.title}}</span>
+                <span>{{reward.description}}</span>
+                <span> voor {{reward.points}} punten</span>
+                <br>
+                <button type="submit" (click)="rewardGoedkeuren(reward._id)" class="btn btn-outline-secondary btn-orange">Bezorgd</button>
+              </li>
+          </div>
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
+  

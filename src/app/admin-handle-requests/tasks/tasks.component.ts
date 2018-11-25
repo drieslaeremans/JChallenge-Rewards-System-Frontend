@@ -17,8 +17,8 @@ export class TasksComponent implements OnInit {
   }
 
   taskGoedkeuren(taskId) {
-    if (confirm('Heb je deze task bezorgd?')) {
-      this.urService.approveReward(taskId);
+    if (confirm('Deze task goedkeuren?')) {
+      this.urService.approveTask(taskId);
     }
   }
 }
