@@ -19,7 +19,7 @@ export class RewardsComponent implements OnInit {
   rewardGoedkeuren(rewardId) {
     if (confirm('Heb je deze reward bezorgd?')) {
       this.urService.approveReward(rewardId).then(() => {
-        this.rewardLijst$ = this.urService.getAllUserRewards();
+        this.rewardLijst$ = this.urService.getAllUsersRewards();
       })
     }
   }
