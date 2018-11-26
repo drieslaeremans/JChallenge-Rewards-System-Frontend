@@ -18,7 +18,9 @@ export class TasksComponent implements OnInit {
 
   taskGoedkeuren(taskId) {
     if (confirm('Deze task goedkeuren?')) {
-      this.urService.approveTask(taskId);
+      this.urService.approveTask(taskId).then(() => {
+        this.taskLijst$ = this.urService.getAllUsersTasks();
+      })
     }
   }
 }

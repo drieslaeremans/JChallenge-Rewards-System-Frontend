@@ -59,9 +59,14 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
-    this.http.patch(this.ACCEPT_TASK, {taskId}, {headers}).toPromise()
-      .then((req) => console.log(req['message']))
-      .catch((req) => console.warn(req['message']));
+    return new Promise(resolve => {
+      this.http.patch(this.ACCEPT_TASK, {taskId}, {headers}).toPromise()
+        .then((req) => {
+          console.log(req['message']);
+          resolve();
+      })
+        .catch((req) => console.warn(req['message']));
+    });
 
   }
 
@@ -71,9 +76,15 @@ export class UserRequestService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
+    return new Promise(resolve => {
+
     this.http.patch(this.ACCEPT_REWARD, {rewardId}, {headers}).toPromise()
-      .then((req) => console.log(req['message']))
+      .then((req) => {
+        console.log(req['message']);
+        resolve();
+      })
       .catch((req) => console.warn(req['message']));
+    });
   }
 
   getAllUsersRewards(): Observable<any> {
