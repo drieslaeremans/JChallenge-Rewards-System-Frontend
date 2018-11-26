@@ -23,8 +23,9 @@ export class AdminRewardsComponent implements OnInit {
   }
 
   deleteReward(rewardId: string) {
-    this.rewardsService.deleteRewardTemplate(rewardId);
-    this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+    this.rewardsService.deleteRewardTemplate(rewardId).then(() => {
+      this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+    })
   }
 
   setEditReward(reward: RewardTemplate) {
@@ -39,12 +40,14 @@ export class AdminRewardsComponent implements OnInit {
 
   saveReward() {
     if (this.createNew) {
-      this.rewardsService.addRewardTemplate(this.reward);
+      this.rewardsService.addRewardTemplate(this.reward).then(() => {
+        this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+      })
     } else {
-      this.rewardsService.updateRewardTemplate(this.reward);
+      this.rewardsService.updateRewardTemplate(this.reward).then(() => {
+        this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
+      })
     }
-
-    this.rewardTemplates$ = this.rewardsService.getRewardTemplates();
   }
 
   open(content) {

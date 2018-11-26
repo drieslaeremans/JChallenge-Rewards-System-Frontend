@@ -23,12 +23,13 @@ export class AdminTasksComponent implements OnInit {
   }
 
   deleteTask(taskId: string) {
-    this.tasksService.deleteTaskTemplate(taskId);
-    this.taskTemplates$ = this.tasksService.getTaskTemplates();
+    this.tasksService.deleteTaskTemplate(taskId).then(() => {
+      this.taskTemplates$ = this.tasksService.getTaskTemplates();
+    })
   }
 
   setEditTask(task: TaskTemplate) {
-    this.task = task;
+    this.task = task
     this.createNew = false;
   }
 
@@ -39,12 +40,14 @@ export class AdminTasksComponent implements OnInit {
 
   saveTask() {
     if (this.createNew) {
-      this.tasksService.addTaskTemplate(this.task);
+      this.tasksService.addTaskTemplate(this.task).then(() => {
+        this.taskTemplates$ = this.tasksService.getTaskTemplates();
+      })
     } else {
-      this.tasksService.updateTaskTemplate(this.task);
+      this.tasksService.updateTaskTemplate(this.task).then(() => {
+        this.taskTemplates$ = this.tasksService.getTaskTemplates();
+      })
     }
-
-    this.taskTemplates$ = this.tasksService.getTaskTemplates();
   }
 
   open(content) {

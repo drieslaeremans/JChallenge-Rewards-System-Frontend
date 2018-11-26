@@ -37,9 +37,14 @@ export class TasksService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
+    return new Promise(resolve => {
     this.http.post(this.ADD_TASKS_API,
       {title: task.title, points: task.points, description: task.description}, {headers : headers}).toPromise()
-      .then( (message) => console.log(message['message']));
+      .then( (message) => {
+        console.log(message['message']);
+        resolve();
+      });
+    });
   }
 
   updateTaskTemplate(task: TaskTemplate) {
@@ -48,16 +53,26 @@ export class TasksService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
+    return new Promise(resolve => {
     this.http.put(this.UPDATE_TASKS_API + '/' + task._id,
       {title: task.title, points: task.points, description: task.description}, {headers: headers}).toPromise()
-      .then((message) => console.log(message['message']));
-
-  }
+      .then((message) => {
+        console.log(message['message']);
+      resolve();
+    });
+  });
+}
 
   deleteTaskTemplate(templateId: string) {
+    return new Promise(resolve => {
     if (confirm('Ben je zeker dat je deze taak wilt verwijderen?\nDeze actie kan niet ongedaan gemaakt worden.')) {
       this.http.delete(this.DELETE_TASK_TEMPLATE + '/' + templateId).toPromise()
-        .then((message) => console.log(message['message']));
+        .then((message) => {
+          console.log(message['message']);
+          resolve();
+        });
     }
-  }
+  });
+}
+
 }

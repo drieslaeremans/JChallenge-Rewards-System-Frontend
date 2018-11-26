@@ -13,7 +13,7 @@ export class RewardsService {
   api: string = environment.APIEndPoint;
   readonly GET_REWARDS_TEMPLATES = this.api + '/rewards/templates';
   readonly GET_REWARDS_TEMPLATE = this.api + '/reward/template';
-  readonly DELETE_REWARD_TEMPLATE = this.api + '/reward/template/delete/';
+  readonly DELETE_REWARD_TEMPLATE = this.api + '/reward/template';
   readonly ADD_REWARDS_API = this.api + '/reward/template/add';
   readonly UPDATE_REWARDS_API = this.api + '/reward/template';
   readonly GET_REWARDS_FEED = this.api + '/rewards/feed';
@@ -42,10 +42,16 @@ export class RewardsService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
+    return new Promise(resolve => {
     this.http.post(this.ADD_REWARDS_API,
       {title: reward.title, points: reward.points, description: reward.description}, {headers : headers}).toPromise()
-      .then( (message) => console.log(message['message']));
+      .then((message) => {
+        console.log(message['message']);
+        resolve();
+      });
+    });
   }
+
 
   updateRewardTemplate(reward: RewardTemplate) {
     const headers = new HttpHeaders({
@@ -53,13 +59,25 @@ export class RewardsService {
       'Authorization': localStorage.getItem('userToken'),
     });
 
+    return new Promise(resolve => {
     this.http.put(this.UPDATE_REWARDS_API + '/' + reward._id,
       {title: reward.title, points: reward.points, description: reward.description}, {headers: headers}).toPromise()
-      .then((message) => console.log(message['message']));
+      .then((message) => {
+        console.log(message['message']);
+        resolve();
+      });
+    });
   }
 
   deleteRewardTemplate(templateId: string) {
+    return new Promise(resolve => {
+      if (confirm('Ben je zeker dat je deze reward wilt verwijderen?\nDeze actie kan niet ongedaan gemaakt worden.')) {
     this.http.delete(this.DELETE_REWARD_TEMPLATE + '/' + templateId).toPromise()
-      .then((message) => console.log(message['message']));
+      .then((message) => {
+        console.log(message['message']);
+        resolve();
+      });
+    }
+    });
   }
 }
