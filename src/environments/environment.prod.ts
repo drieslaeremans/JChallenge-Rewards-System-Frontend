@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  APIEndPoint: 'https://fast-temple-89292.herokuapp.com/v1'
+  APIEndPoint: 'https://aqueous-shore-42124.herokuapp.com/v1'
 };
