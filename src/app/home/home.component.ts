@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   setRewardFeed(limit: number) {
-    this.rewardFeed$ = this.rewardsService.getRewardFeed();
+    this.rewardFeed$ = this.rewardsService.getRewardFeed(limit);
   }
 
 }
